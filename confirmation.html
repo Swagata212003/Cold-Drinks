@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>🎉 Thank You for Your Purchase!</h1>
+        <p>Your order has been successfully placed. You will receive a confirmation email shortly.</p>
+        
+        <div class="order-summary">
+            <h2>🛍️ Order Summary</h2>
+            <p id="order-item"></p>
+            <p><strong>Total Amount:</strong> <span id="order-total"></span></p>
+        </div>
+
+        <button class="home-btn" onclick="window.location.href='index.html'">🏠 Return to Home</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let cartItem = JSON.parse(localStorage.getItem('cartItem'));
+
+            if (cartItem) {
+                document.getElementById('order-item').innerText = `Item: ${cartItem.name}`;
+                document.getElementById('order-total').innerText = `$${cartItem.price.toFixed(2)}`;
+                localStorage.removeItem('cartItem');  // Clear cart after order
+            } else {
+                document.getElementById('order-item').innerText = "No items found.";
+                document.getElementById('order-total').innerText = "$0.00";
+            }
+        });
+    </script>
+</body>
+</html>
+
+

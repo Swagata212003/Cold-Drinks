@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Shop</title>
+</head>
+<body>
+    <div id="main">
+        <!-- Navbar -->
+        <navshop>
+            <img src="https://1000logos.net/wp-content/uploads/2019/01/Fanta-Logo-2008-2010.png" 
+            alt="Logo" 
+            width="100">
+            <div class="side-nav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </navshop>
+
+        <!-- Shop Section -->
+        <section class="shop">
+            <h1 class="section-title">🛒 Your Shopping Cart</h1>
+            <div class="cart-container">
+                <div id="cart-items">
+                    <p class="empty-cart">Your cart is empty. Start shopping now! 🛍️</p>
+                </div>
+                <div class="cart-summary">
+                    <h3>Total: <span id="total-price">$0.00</span></h3>
+                    <button class="checkout-btn" onclick="window.location.href='payment.html'">🛍️ Proceed to Checkout</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h2>Contact Us</h2>
+                    <p>Email: <a href="mailto:support@coldrinkz.com">support@coldrinkz.com</a></p>
+                    <p>Phone: <a href="tel:+91874590">+91 98075892xx</a></p>
+                    <p>Address: 123 Cold Drink Lane, Bardahman</p>
+                </div>
+        
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+        
+                <!-- Social Media -->
+                <div class="footer-social">
+                    <h2>Follow Us</h2>
+                    <div class="social-icons">
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                        <a href="#"><i class="ri-instagram-fill"></i></a>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                        <a href="#"><i class="ri-youtube-fill"></i></a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="footer-bottom">
+                <p>© 2025 Cold Drinks. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let cartItem = JSON.parse(localStorage.getItem('cartItem'));
+
+            if (cartItem) {
+                document.getElementById('cart-items').innerHTML = `
+                    <div class="cart-item">
+                        <h3>${cartItem.name}</h3>
+                        <p>Price: $${cartItem.price.toFixed(2)}</p>
+                        <input type="number" value="1" min="1" id="quantity" onchange="updateTotal(${cartItem.price})">
+                    </div>
+                `;
+                updateTotal(cartItem.price);
+            }
+        });
+
+        function updateTotal(price) {
+            let quantity = document.getElementById('quantity').value;
+            let totalPrice = price * quantity;
+            document.getElementById('total-price').innerText = `$${totalPrice.toFixed(2)}`;
+        }
+
+    </script>
+</body>
+</html>
